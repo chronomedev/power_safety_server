@@ -6,6 +6,9 @@ rm -f -- log_power.txt
 
 (echo "====== UPS power safety script by Chronomedev for CDC (Chronome Data Center) ======" >> log_power.txt) &
 ping -c 1 192.168.100.1 &> /dev/null
+
+# bawah tethring hp chronome
+ping -c 1 172.20.10.1 &> /dev/null
 if [ $? -eq 2 ]; then
     echo "Default Gateaway tidak terdeteksi....untuk safety UPS..auto shutdown 60 detik"
     (echo "Default Gateaway tidak terdeteksi....untuk safety UPS..auto shutdown 60 detik" >> log_power.txt) &
@@ -32,7 +35,7 @@ do
         (date "+%Y-%m-%d %H:%M:%S" >> log_power.txt) &
         sleep 60
         ((checkPhase++))
-        if [ $checkPhase -eq 3 ]; then
+        if [ $checkPhase -eq 4 ]; then
             echo "Melakukan shutdown...cek terminal log ketika startup"
             (echo "Melakukan shutdown...cek terminal log ketika startup..initialize" >> log_power.txt) &
             shutdown -h now
